@@ -1,0 +1,46 @@
+/*QUIENES SÓMOS-MISION-VISION*/
+main {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.historia {
+    background: #fff8f2;
+    border-left: 6px solid #FFC0CB;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+}
+.historia h2, h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #5D4037;
+}
+.grid-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+.grid-info div {
+    background: #fff8f2;
+    border: 2px solid #FFD4DA;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: justify;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.grid-info div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.grid-info h2 {
+    font-size: 1.5 rem;
+    margin-bottom: 0.5rem;
+    color: #5D4037;
+}
+
+.parrafo {
+    text-align: justify;
+    margin: 1rem auto;
+}

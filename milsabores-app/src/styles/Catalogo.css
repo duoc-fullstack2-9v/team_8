@@ -1,0 +1,145 @@
+/* CATÁLOGO */
+.categoria {
+    margin: 2rem auto;
+    max-width: 1200px;
+    animation: fadeIn 0.6s ease;
+}
+
+.titulo-categoria {
+    font-size: 1.8rem;
+    text-align: center;
+    color: #6B3E26;
+    margin-bottom: 1.5rem;
+    font-family: 'Lato', sans-serif;
+    border: 2px solid;
+    border-radius: 12px;
+    background: #FFF5E1;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+/* TARJETAS DE PRODUCTOS */
+.card {
+    background: #FFF5E1;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 1rem;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+.card img {
+    max-width: 100px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+.card h3 {
+    margin: 0.5rem 0;
+    color: #6B3E26;
+    text-align: justify;
+}
+.card p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: #444;
+    text-align: justify;
+}
+.precio {
+    font-weight: bold;
+    color: #D35400;
+    margin: 0.8rem 0;
+    display: block;
+}
+
+/* CONTROL CANTIDAD */
+.control-cantidad {
+    display: inline-block;
+    align-items: center;
+    border: 2px solid #8B4513;
+    border-radius: 12px;
+    max-width: 250px;
+    padding: 3px 15px;
+    background: #fff;
+    margin: 10px 0;
+}
+
+.btn-menos, .btn-mas {
+    background: #FFC0CB;
+    border: none;
+    padding: 0.5rem 0.8rem;
+    font-size: 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-weight: bold;
+}
+
+.btn-menos:hover, .btn-mas:hover {
+    background: #923838;
+    color: white;
+}
+
+.btn-menos:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
+.btn-menos:disabled:hover {
+    background: #cccccc;
+    color: #666;
+}
+
+.num {
+    margin: 0 0.5rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    min-width: 30px;
+    text-align: center;
+}
+
+/* BOTÓN AGREGAR AL CARRITO */
+.agregar {
+    background: #8B4513;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    width: 100%;
+    transition: background 0.3s ease;
+    margin-top: 0.5rem;
+    max-width: 200px;
+    margin-left: auto;
+}
+
+.agregar:hover {
+    background: #A0522D;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.agregar:active {
+  transform: translateY(0);
+}
+
+/* ANIMACIÓN */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
