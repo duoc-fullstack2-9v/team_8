@@ -4,7 +4,7 @@ import Blog from './pages/Blog.jsx'
 import Carrito from './pages/Carrito.jsx'
 import Catalogo from './pages/Catalogo.jsx'
 import Contacto from './pages/Contacto.jsx'
-import Login from './pages/Login.jsx'
+import Login from './pages/Login-page.jsx'
 import QuienesSomos from './pages/QuienesSomos.jsx'
 import RegistroUser from './pages/RegistroUser.jsx'
 
