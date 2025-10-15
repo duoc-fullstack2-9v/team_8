@@ -56,7 +56,7 @@ const Registro = ({ onNavigate }) => {
                 onChange={(e) => setPassword(e.target.value)}
             />
             <button onClick={registrarUser}>Registrarse</button>
-            <button onClick={() => onNavigate('login')}>Volver al login</button>
+            <button onClick={() => onNavigate('login-page')}>Volver al login</button>
             <p className="mensaje">{mensaje}</p>
         </div>
     );
