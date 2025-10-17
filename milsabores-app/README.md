@@ -1,16 +1,44 @@
-# React + Vite
+# team_8
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Proyecto base del equipo 8.  
+Incluye configuración inicial con React + Vite y Vitest para pruebas.  
+Se añadieron componentes (Home, Login, Registro) y pruebas unitarias e integrales con cobertura total.
 
-Currently, two official plugins are available:
+## Tecnologías utilizadas
+- React + Vite
+- Vitest + Testing Library
+- CSS Modules
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+##  Estructura del proyecto
+src/  
+ ├── components/  
+ │   ├── Home.jsx  
+ │   ├── Login.jsx  
+ │   └── Registro.jsx  
+ ├── App.jsx  
+ └── main.jsx  
 
-## React Compiler
+tests/  
+ ├── App.spec.jsx  
+ ├── Home.spec.jsx  
+ ├── Login.spec.jsx  
+ └── Registro.spec.jsx  
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Resultados de Testing y Coverage
 
-## Expanding the ESLint configuration
+Se implementaron pruebas unitarias y de integración con **Vitest + Testing Library**, cubriendo todos los componentes y rutas de la aplicación.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Reporte final de coverage
+
+All files | 100 | 100 | 100 | 100
+src/App.jsx | 100 | 100 | 100 | 100
+src/main.jsx | 100 | 100 | 100 | 100
+src/components | 100 | 100 | 100 | 100
+
+
+✔️ 26 tests en total, todos en verde.  
+✔️ Cobertura total alcanzada (100% en statements, branches, functions y lines).  
+✔️ Entrega validada y documentada.
+
+  
+- Se crea este README.md como documentación para los tests, garantizando trazabilidad y mantenibilidad.  
