@@ -79,7 +79,8 @@ export function CarritoProvider({ children }) {
     agregarCarrito,
     eliminarProducto,
     actualizarCantidad,
-    vaciarCarrito
+    vaciarCarrito,
+    mostrarMensajeTemporal   // 👈 ahora sí está disponible en el contexto
   };
 
   return (
