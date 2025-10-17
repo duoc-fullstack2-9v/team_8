@@ -1,6 +1,6 @@
-import { useCarrito } from '../hooks/useCarrito';
+import { useCarrito } from '../context/CarritoContext';
 import ProductoCard from '../components/ProductoCard';
-import { categoriaProductos } from '../data/Productos';
+import { categoriaProductos } from '../data/productos.js'
 import '../styles/Catalogo.css';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
@@ -24,7 +24,6 @@ function Catalogo() {
                 <ProductoCard
                 key={producto.idProd}
                 producto={producto}
-                onAgregarCarrito={agregarCarrito}
                 />
             ))}
             </div>
@@ -37,7 +36,6 @@ function Catalogo() {
                 <ProductoCard
                 key={producto.idProd}
                 producto={producto}
-                onAgregarCarrito={agregarCarrito}
                 />
             ))}
             </div>
@@ -50,7 +48,6 @@ function Catalogo() {
                 <ProductoCard
                 key={producto.idProd}
                 producto={producto}
-                onAgregarCarrito={agregarCarrito}
                 />
             ))}
             </div>
@@ -63,7 +60,6 @@ function Catalogo() {
                 <ProductoCard
                 key={producto.idProd}
                 producto={producto}
-                onAgregarCarrito={agregarCarrito}
                 />
             ))}
             </div>
@@ -76,7 +72,6 @@ function Catalogo() {
                 <ProductoCard
                 key={producto.idProd}
                 producto={producto}
-                onAgregarCarrito={agregarCarrito}
                 />
             ))}
             </div>
@@ -89,7 +84,6 @@ function Catalogo() {
                 <ProductoCard
                 key={producto.idProd}
                 producto={producto}
-                onAgregarCarrito={agregarCarrito}
                 />
             ))}
             </div>
@@ -102,7 +96,6 @@ function Catalogo() {
                 <ProductoCard
                 key={producto.idProd}
                 producto={producto}
-                onAgregarCarrito={agregarCarrito}
                 />
             ))}
             </div>
@@ -115,7 +108,6 @@ function Catalogo() {
                 <ProductoCard
                 key={producto.idProd}
                 producto={producto}
-                onAgregarCarrito={agregarCarrito}
                 />
             ))}
             </div>

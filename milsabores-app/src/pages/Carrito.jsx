@@ -1,4 +1,4 @@
-import { useCarrito } from '../hooks/useCarrito';
+import { useCarrito } from '../context/CarritoContext';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -36,13 +36,13 @@ function Carrito() {
             <Navbar />
             <HeroBanner titulo="Carrito de Compras" subtitulo="Revisa y gestiona tus productos seleccionados" />
 
-            <main style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
+            <main className='carrito-main'>
                 <div className="carrito-container">
 
 
                     <div id="carrito-contenido">
                         {carrito.length === 0 ? (
-                            <p style={{ textAlign: 'center', fontSize: '1.2rem' }}>No hay productos en el carrito.</p>
+                            <p>No hay productos en el carrito.</p>
                         ) : (
                             carrito.map((item) => (
                                 <div key={item.idProd} className="item-carrito">
@@ -70,11 +70,6 @@ function Carrito() {
                             </button>
                         </>
                     )}
-
-                    {/* Mensaje flotante */}
-                    <div id="mensaje-flotante" className={`mensaje-flotante ${mostrarMensaje ? 'mostrar' : ''}`}>
-                        {mensajeTexto}
-                    </div>
                 </div>
             </main>
 

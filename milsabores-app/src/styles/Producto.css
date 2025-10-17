@@ -1,0 +1,96 @@
+/* MODAL DE PRODUCTO */
+.producto-detalle-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Fondo difuminado */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease;
+}
+
+.producto-detalle-modal {
+    background: #FFF5E1;
+    border-radius: 15px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    animation: slideUp 0.3s ease;
+}
+
+.cerrar-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #8B4513;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cerrar-modal:hover {
+    background: #A0522D;
+}
+
+.producto-detalle-modal img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    margin: 0 auto 1rem auto;
+    display: block;
+    border: 3px solid #8B4513;
+}
+
+.producto-detalle-modal h2 {
+    color: #6B3E26;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-family: 'Lato', sans-serif;
+}
+
+.producto-detalle-modal .descripcion {
+    text-align: justify;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    color: #444;
+}
+
+.producto-detalle-modal .precio {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #D35400;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.btn-volver {
+    background: #8B4513;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: block;
+    margin: 1rem auto 0 auto;
+    transition: background 0.3s;
+}
+
+.btn-volver:hover {
+    background: #A0522D;
+}

@@ -1,4 +1,4 @@
-import { useCarrito } from '../hooks/useCarrito';
+import { useCarrito } from '../context/CarritoContext';
 import ProductoCard from '../components/ProductoCard';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';

@@ -1,4 +1,11 @@
 /* CARRITO COMPRA */
+.carrito-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
 .carrito-container {
     padding: 2rem;
     background: #FFF5E1;
@@ -16,6 +23,13 @@
     margin: 2rem 0;
     justify-items: center;
 }
+
+#carrito-contenido p {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
 
 .item-carrito {
     background: #fff;

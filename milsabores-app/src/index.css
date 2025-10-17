@@ -170,4 +170,59 @@ footer .rrss-icono{
     margin: 0;
 }
 
+/* MENSAJE FLOTANTE GLOBAL */
+.mensaje-flotante-global {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #FFC0CB;
+    color: #5D4037;
+    padding: 12px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(20px);
+    z-index: 10000; /* Más alto que el modal */
+    font-weight: bold;
+    max-width: 300px;
+    text-align: center;
+}
+
+.mensaje-flotante-global.mostrar { 
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ANIMACIONES */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { 
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .producto-detalle-modal {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    .mensaje-flotante-global {
+        left: 20px;
+        right: 20px;
+        max-width: none;
+    }
+}
+
 
