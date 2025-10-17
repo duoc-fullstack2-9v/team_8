@@ -58,3 +58,16 @@ El servidor de desarrollo (`npm run dev`) no corre con datos reales porque falta
 4. **test:** páginas Carrito y Catálogo (render básico sin crash).  
 
 Con estos pasos se alcanzará el **100% de coverage** de forma incremental y con trazabilidad clara.
+
+### Nota sobre `package-lock.json` en la raíz
+En la carpeta raíz del repositorio (`team_8_alvaro/`) existe un archivo `package-lock.json` vacío, con la siguiente estructura mínima:
+
+```json
+{
+  "name": "team_8_alvaro",
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {}
+}
+
+Este archivo no contiene dependencias reales y no se utiliza en el proyecto. El package-lock.json válido y en uso es el que está dentro de la carpeta milsabores-app/, donde se encuentran todas las dependencias necesarias para ejecutar la aplicación y los tests. Se mantiene el archivo de la raíz sin modificar para no alterar la estructura original del repositorio.
