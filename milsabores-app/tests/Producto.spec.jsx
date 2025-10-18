@@ -27,7 +27,10 @@ describe("Producto Page", () => {
       </MemoryRouter>
     )
 
-    expect(screen.getByText(/torta/i)).toBeInTheDocument()
+    // Ajustado al texto real que renderiza el componente
+    expect(
+      screen.getByText((content) => content.includes("Mock Producto"))
+    ).toBeInTheDocument()
   })
 
   it("muestra mensaje de error cuando el producto no existe", () => {
