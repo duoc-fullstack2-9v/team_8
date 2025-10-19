@@ -51,8 +51,9 @@ El proyecto incluye tests para componentes, páginas y contexto global, con cobe
 
 ### Clona el repositorio:
 
-- git clone https://github.com/tu-usuario/milsabores-app.git
-- cd milsabores-app
+- git clone https://github.com/duoc-fullstack2-9v/team_8.git
+- cd team_8/milsabores-app
+
 
 ### Instala dependencias:
 
