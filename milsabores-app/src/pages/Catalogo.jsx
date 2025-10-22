@@ -1,6 +1,6 @@
 import { useCarrito } from '../context/CarritoContext';
 import ProductoCard from '../components/ProductoCard';
-import { categoriaProductos } from '../data/productos.js'
+import { categoriaProductos } from '../services/ProductosService'; 
 import '../styles/Catalogo.css';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';

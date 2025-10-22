@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/pages/RegistroUser.jsx</title>
+    <title>Code coverage report for src/services/ProductosService.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/pages</a> RegistroUser.jsx</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/services</a> ProductosService.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.6% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>19/23</span>
+                <span class='fraction'>16/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.6% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>19/23</span>
+                <span class='fraction'>16/20</span>
             </div>
         
             
@@ -86,77 +86,53 @@
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a>
-<a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L24'></a><a href='#L24'>24</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import Header from '../components/Header';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import Registro from '../components/Registro';
-import '../styles/RegistroUser.css';
-import { useNavigate } from 'react-router-dom';
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import productosData from '../data/productos.json';
 &nbsp;
-function RegistroUser() {
-    console.log("Página de Registro de Usuarios");
+// Para mantener compatibilidad total
+export const productos = productosData.productos;
 &nbsp;
-    const navigate = useNavigate();
+export const categoriaProductos = {
+  "Tortas Cuadradas": productos.filter(p =&gt; p.categProd === "Tortas Cuadradas"),
+  "Tortas Circulares": productos.filter(p =&gt; p.categProd === "Tortas Circulares"), 
+  "Postres Individuales": productos.filter(p =&gt; p.categProd === "Postres Individuales"),
+  "Productos Sin Azúcar": productos.filter(p =&gt; p.categProd === "Productos Sin Azúcar"),
+  "Pastelería Tradicional": productos.filter(p =&gt; p.categProd === "Pastelería Tradicional"),
+  "Producto Sin Gluten": productos.filter(p =&gt; p.categProd === "Producto Sin Gluten"),
+  "Productos Veganos": productos.filter(p =&gt; p.categProd === "Productos Veganos"),
+  "Tortas Especiales": productos.filter(p =&gt; p.categProd === "Tortas Especiales")
+};
 &nbsp;
-    const handleNavigate = <span class="fstat-no" title="function not covered" >(destination) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        if (destination === 'login-page') {</span>
-<span class="cstat-no" title="statement not covered" >            navigate('/login');</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >    };</span>
+// Funciones adicionales para futura migración a API
+export const getProductoById = <span class="fstat-no" title="function not covered" >(id) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  return productos.find(producto =&gt; producto.idProd === id);</span>
+<span class="cstat-no" title="statement not covered" >};</span>
 &nbsp;
-    return (
-        &lt;&gt;
-            &lt;Header /&gt;
-            &lt;Navbar /&gt;
-&nbsp;
-            &lt;Registro onNavigate={handleNavigate} /&gt;
-&nbsp;
-            &lt;Footer /&gt;
-&nbsp;
-        &lt;/&gt;
-    );
-}
-&nbsp;
-export default RegistroUser;</pre></td></tr></table></pre>
+export const getProductosByCategoria = <span class="fstat-no" title="function not covered" >(categoria) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  return productos.filter(producto =&gt; producto.categProd === categoria);</span>
+<span class="cstat-no" title="statement not covered" >};</span></pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->

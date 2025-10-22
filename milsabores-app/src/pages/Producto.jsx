@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { productos } from '../data/productos';
+import { productos } from '../services/ProductosService'; 
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';

@@ -44,7 +44,7 @@ function ProductoCard({ producto }) {
             <h3>{producto.nombreProd}</h3>
 
             <p className="descripcion">
-                {producto.descProd.lenght > 100
+                {producto.descProd.length > 100
                     ? `${producto.descProd.substring(0, 100)}...`
                     : producto.descProd
                 }
