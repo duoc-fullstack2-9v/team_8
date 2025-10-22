@@ -49,7 +49,8 @@ function ProductoCard({ producto }) {
                     : producto.descProd
                 }
             </p>
-            <p className='precio'>${producto.precioProd.toLocaleString('es-CL')} CLP</p>
+            <p className='precio'>${producto.precioProd.toLocaleString('es-CL')} CLP</p>         
+
 
             <div className="control-cantidad">
                 <button className="btn-menos" onClick={disminuirCantidad} aria-label="Disminuir cantidad" disabled={cantidad === 0}>-</button>
