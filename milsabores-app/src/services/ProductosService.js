@@ -14,12 +14,12 @@ export const categoriaProductos = {
   "Tortas Especiales": productos.filter(p => p.categProd === "Tortas Especiales")
 };
 
-// Funciones adicionales para futura migración a API
 export const getProductoById = (id) => {
   return productos.find(producto => producto.idProd === id);
 };
 
 export const getProductosByCategoria = (categoria) => {
+  const productos = getProductosAdmin(); 
   return productos.filter(producto => producto.categProd === categoria);
 };
 
@@ -75,3 +75,4 @@ export const getCategorias = () => {
   const productos = getProductosAdmin();
   return [...new Set(productos.map(p => p.categProd))];
 };
+

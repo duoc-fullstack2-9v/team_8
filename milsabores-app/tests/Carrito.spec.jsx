@@ -190,6 +190,6 @@ describe('Página Carrito', () => {
     useCarrito.mockReturnValue(mockCarritoVacio);
     renderCarrito();
     
-    expect(screen.getByText('No hay productos en el carrito.')).toBeInTheDocument();
+    expect(screen.getByText('🛒 Tu carrito está vacío')).toBeInTheDocument();
   });
 });

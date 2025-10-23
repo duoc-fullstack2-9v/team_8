@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { productos } from '../services/ProductosService'; 
+import { getProductosAdmin } from '../services/ProductosService'; 
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -8,6 +8,7 @@ import '../styles/Producto.css';
 function Producto() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const productos = getProductosAdmin(); 
   const producto = productos.find(p => p.idProd === parseInt(id));
 
   if (!producto) {

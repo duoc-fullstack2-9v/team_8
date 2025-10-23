@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import HeroBanner from '../components/HeroBanner';
+import { useNavigate } from 'react-router-dom'; 
 import '../styles/Carrito.css';
 
 function Carrito() {
@@ -11,10 +12,10 @@ function Carrito() {
         totalPagar,
         eliminarProducto,
         actualizarCantidad,
-        vaciarCarrito,
-        mostrarMensaje,
-        mensajeTexto
+        vaciarCarrito
     } = useCarrito();
+    
+    const navigate = useNavigate(); 
 
     const aumentar = (idProd) => {
         const producto = carrito.find(item => item.idProd === idProd);
@@ -38,11 +39,18 @@ function Carrito() {
 
             <main className='carrito-main'>
                 <div className="carrito-container">
-
-
                     <div id="carrito-contenido">
                         {carrito.length === 0 ? (
-                            <p>No hay productos en el carrito.</p>
+                            <div className="carrito-vacio">
+                                <p>🛒 Tu carrito está vacío</p>
+                                <p>¡Descubre nuestros deliciosos productos!</p>
+                                <button 
+                                    className="btn-seguir-comprando"
+                                    onClick={() => navigate('/catalogo')}
+                                >
+                                    🍰 Seguir Comprando
+                                </button>
+                            </div>
                         ) : (
                             carrito.map((item) => (
                                 <div key={item.idProd} className="item-carrito">
@@ -65,9 +73,17 @@ function Carrito() {
                     {carrito.length > 0 && (
                         <>
                             <p className="total">TOTAL: ${totalPagar.toLocaleString('es-CL')} CLP</p>
-                            <button className="vaciar" onClick={vaciarCarrito}>
-                                Vaciar carrito
-                            </button>
+                            <div className="acciones-finales">
+                                <button className="vaciar" onClick={vaciarCarrito}>
+                                    🗑️ Vaciar carrito
+                                </button>
+                                <button 
+                                    className="btn-seguir-comprando"
+                                    onClick={() => navigate('/catalogo')}
+                                >
+                                    🛍️ Seguir Comprando
+                                </button>
+                            </div>
                         </>
                     )}
                 </div>

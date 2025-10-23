@@ -4,6 +4,16 @@ import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import Login from '../src/components/Login';
 
+// Mock para useNavigate
+const mockNavigate = vi.fn();
+vi.mock('react-router-dom', async () => {
+  const actual = await vi.importActual('react-router-dom');
+  return {
+    ...actual,
+    useNavigate: () => mockNavigate,
+  };
+});
+
 // Mock para localStorage
 const localStorageMock = {
   getItem: vi.fn(),
@@ -101,7 +111,6 @@ describe('Componente Login', () => {
   });
 
   test('realiza login exitoso con credenciales correctas', async () => {
-    const mockOnNavigate = vi.fn();
     const user = userEvent.setup();
     
     const usuariosMock = [
@@ -113,7 +122,7 @@ describe('Componente Login', () => {
     ];
     localStorageMock.getItem.mockReturnValue(JSON.stringify(usuariosMock));
     
-    renderLogin({ onNavigate: mockOnNavigate });
+    renderLogin();
     
     const emailInput = screen.getByPlaceholderText('Correo electrónico');
     const passwordInput = screen.getByPlaceholderText('Contraseña');
@@ -123,9 +132,8 @@ describe('Componente Login', () => {
     await user.type(passwordInput, 'password123');
     await user.click(botonIngresar);
     
-    // Verificar que se llamó a localStorage.setItem para guardar la sesión
     expect(localStorageMock.setItem).toHaveBeenCalledWith('sesionActiva', 'test@example.com');
-    // Verificar que se llamó a onNavigate para redirigir
-    expect(mockOnNavigate).toHaveBeenCalledWith('home');
+    expect(localStorageMock.setItem).toHaveBeenCalledWith('userRole', 'user');
+    expect(mockNavigate).toHaveBeenCalledWith('/');
   });
 });

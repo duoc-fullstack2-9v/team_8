@@ -10,6 +10,7 @@ body{
   );
   background-color: #FFF5E1; /* Crema Pastel */
   color: #5D4037; /* Marrón Oscuro */
+  min-height: 100vh;
 }
 
 /*FUENTES*/

@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import HeroBanner from '../components/HeroBanner';
-import { productos } from '../services/ProductosService'; 
+import { getProductosAdmin } from '../services/ProductosService'; 
 import '../styles/Inicio.css';
 
 const productosDestacadosIds = [4, 2, 8, 14, 9, 7];
@@ -12,6 +12,9 @@ const productosDestacadosIds = [4, 2, 8, 14, 9, 7];
 function Inicio() {
     console.log("Página de Inicio");
     const { agregarCarrito, mostrarMensaje, mensajeTexto } = useCarrito();
+
+    // Obtener productos actualizados del admin
+    const productos = getProductosAdmin(); 
 
     const productosDestacados = productos.filter(producto => productosDestacadosIds.includes(producto.idProd));
 

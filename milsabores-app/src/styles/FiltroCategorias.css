@@ -1,0 +1,40 @@
+.filtro-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filtro-label {
+  font-weight: bold;
+  color: #6B3E26;
+  font-size: 0.9em;
+}
+
+.filtro-categoria {
+  padding: 10px 15px;
+  border: 2px solid #8B4513;
+  border-radius: 8px;
+  font-size: 1em;
+  background: white;
+  min-width: 200px;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filtro-categoria:focus {
+  outline: none;
+  border-color: #6B3E26;
+  box-shadow: 0 0 0 2px rgba(107, 62, 38, 0.2);
+}
+
+.filtro-categoria:hover {
+  border-color: #6B3E26;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .filtro-categoria {
+    min-width: 150px;
+  }
+}
