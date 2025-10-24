@@ -42,6 +42,9 @@ Aplicación web de pastelería desarrollada con **React + Vite** que permite exp
 
 
 ## 📦 Instalación
+### Prerrequisitos:
+- Node.js 18+
+- npm 9+
 
 ```bash
 # Clonar repositorio
@@ -82,28 +85,6 @@ npm run test:watch
 - **Páginas:** 92.41% 🚀
 - **Contexto:** 83.95% 👍
 
-
-## 🛠 Instalación y Desarrollo
-### Prerrequisitos:
-- Node.js 18+
-- npm 9+
-
-### Clonar y Configurar
-```bash
-git clone https://github.com/duoc-fullstack2-9v/team_8.git
-cd team_8/milsabores-app
-npm install
-```
-
-### Ejecutar en Desarrollo:
-```bash
-npm run dev
-```
-
-### Ejecutar Testeo (Cobertura):
-```bash
-npm run test:coverage
-```
 
 ## 👥 Equipo de Desarrollo
 ### Matías Suazo
