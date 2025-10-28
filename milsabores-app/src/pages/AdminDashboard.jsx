@@ -11,7 +11,8 @@ import {
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import FiltroCategorias from '../components/FiltroCategorias'; // ✅ Nuevo import
+import FiltroCategorias from '../components/FiltroCategorias'; 
+import ProductoForm from '../components/ProductoForm'; 
 import '../styles/AdminDashboard.css';
 
 const AdminDashboard = () => {
@@ -98,7 +99,6 @@ const AdminDashboard = () => {
             ➕ Agregar Producto
           </button>
           
-          {/* ✅ Filtro como componente reutilizable */}
           <FiltroCategorias 
             categorias={categorias}
             categoriaSeleccionada={filtroCategoria}
@@ -173,5 +173,5 @@ const AdminDashboard = () => {
   );
 };
 
-// ... (ProductoForm permanece igual)
+
 export default AdminDashboard;

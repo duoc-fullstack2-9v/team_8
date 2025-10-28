@@ -64,7 +64,6 @@ const Login = ({ onNavigate }) => {
             <button onClick={login}>Ingresar</button>
             <button onClick={() => onNavigate('registro')}>Crear cuenta</button>
             
-            {/* Acceso admin discreto - solo visible si se hace hover */}
             <div className="admin-access" style={{opacity: 0.3, fontSize: '12px', marginTop: '10px'}}>
                 <span title="Credenciales: admin@milsabores.com / admin123">
                   Acceso Administrador
