@@ -33,13 +33,11 @@ const ProductoForm = ({ producto, onSave, onCancel }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Validaciones básicas
     if (!formData.nombreProd || !formData.precioProd || !formData.categProd) {
       alert('Por favor completa los campos obligatorios: Nombre, Precio y Categoría');
       return;
     }
 
-    // Convertir precio a número
     const productoData = {
       ...formData,
       precioProd: Number(formData.precioProd)
@@ -66,8 +64,9 @@ const ProductoForm = ({ producto, onSave, onCancel }) => {
         
         <form onSubmit={handleSubmit} className="producto-form">
           <div className="form-group">
-            <label>Nombre del Producto *</label>
+            <label htmlFor="nombreProd">Nombre del Producto *</label>
             <input
+              id="nombreProd"
               type="text"
               name="nombreProd"
               value={formData.nombreProd}
@@ -78,8 +77,9 @@ const ProductoForm = ({ producto, onSave, onCancel }) => {
           </div>
 
           <div className="form-group">
-            <label>Descripción</label>
+            <label htmlFor="descProd">Descripción</label>
             <textarea
+              id="descProd"
               name="descProd"
               value={formData.descProd}
               onChange={handleChange}
@@ -89,8 +89,9 @@ const ProductoForm = ({ producto, onSave, onCancel }) => {
           </div>
 
           <div className="form-group">
-            <label>Precio (CLP) *</label>
+            <label htmlFor="precioProd">Precio (CLP) *</label>
             <input
+              id="precioProd"
               type="number"
               name="precioProd"
               value={formData.precioProd}
@@ -102,8 +103,9 @@ const ProductoForm = ({ producto, onSave, onCancel }) => {
           </div>
 
           <div className="form-group">
-            <label>Categoría *</label>
+            <label htmlFor="categProd">Categoría *</label>
             <select
+              id="categProd"
               name="categProd"
               value={formData.categProd}
               onChange={handleChange}
@@ -119,8 +121,9 @@ const ProductoForm = ({ producto, onSave, onCancel }) => {
           </div>
 
           <div className="form-group">
-            <label>URL de la Imagen</label>
+            <label htmlFor="imagenProd">URL de la Imagen</label>
             <input
+              id="imagenProd"
               type="text"
               name="imagenProd"
               value={formData.imagenProd}

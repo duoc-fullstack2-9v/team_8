@@ -2,7 +2,7 @@
 
 Aplicación web de pastelería desarrollada con **React + Vite** que permite explorar productos, gestionar carrito de compras y administrar inventario.
 
-![Coverage](https://img.shields.io/badge/Coverage-88.57%25-brightgreen)
+![Coverage](https://img.shields.io/badge/Coverage-89.52%25-brightgreen)
 ![Tests](https://img.shields.io/badge/Tests-121%20passed-success)
 ![React](https://img.shields.io/badge/React-18.2.0-blue)
 ![Vite](https://img.shields.io/badge/Vite-5.0.0-orange)
@@ -63,9 +63,9 @@ El proyecto cuenta con un sistema de testing completo que garantiza la calidad d
 
 ### ✅ Métricas de Calidad:
 - **88.57% Cobertura Total** - Líneas de código testeadas
-- **121 Tests Pasando** - Suite completa funcional
+- **128 Tests Pasando** - Suite completa funcional
 - **100% Servicios** - Lógica de negocio completamente cubierta
-- **94.6% Componentes** - UI robusta y confiable
+- **95.43% Componentes** - UI robusta y confiable
 
 ### 🛠 Comandos de Testing:
 ```bash
@@ -81,7 +81,7 @@ npm run test:watch
 
 ### 📊 Cobertura por Categoría:
 - **Servicios:** 100% 🚀
-- **Componentes:** 94.6% 🚀
+- **Componentes:** 95.43% 🚀
 - **Páginas:** 92.41% 🚀
 - **Contexto:** 83.95% 👍
 
@@ -94,7 +94,7 @@ npm run test:watch
 - Identificación y corrección de bugs críticos
 - Garantía de calidad del código y funcionalidades
 - Implementación de estrategias de testing
-- Logro: 88.57% de cobertura con 121 tests automatizados
+- Logro: 89.52% de cobertura con 128 tests automatizados
 
 ### Álvaro Chávez
 **🎯 Rol:** Full Stack Developer & Arquitecto
