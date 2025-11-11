@@ -17,8 +17,10 @@ function Header() {
             </Link>
         </div>
         <div className="title">
-            <h1>Pastelería Mil Sabores</h1>
-            <p>50 años endulzando tus recuerdos</p>
+            <Link to="/">
+                <h1>Pastelería Mil Sabores</h1>
+                <p>50 años endulzando tus recuerdos</p>
+            </Link>
         </div>
         <div className="icons">
             <div className="cart-icon">

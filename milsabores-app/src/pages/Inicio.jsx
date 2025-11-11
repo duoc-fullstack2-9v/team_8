@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import HeroBanner from '../components/HeroBanner';
 import { getProductosAdmin } from '../services/ProductosService'; 
 import '../styles/Inicio.css';
+import '../styles/Catalogo.css'
 
 const productosDestacadosIds = [4, 2, 8, 14, 9, 7];
 

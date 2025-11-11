@@ -44,6 +44,16 @@ describe('Componente Header', () => {
     expect(screen.getByText('50 años endulzando tus recuerdos')).toBeInTheDocument();
   });
 
+    test('el título de la pastelería navega al inicio', async () => {
+    const user = userEvent.setup();
+    renderHeader();
+
+    const titleLink = screen.getByText('Pastelería Mil Sabores').closest('a');
+
+    expect(titleLink).toHaveAttribute('href', '/');
+    await user.click(titleLink);
+  });
+
   test('muestra el contador del carrito', () => {
     renderHeader(5);
     

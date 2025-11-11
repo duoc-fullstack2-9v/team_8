@@ -230,8 +230,11 @@
   align-items: center;
   justify-content: center;
   margin: 20px 0 30px 0;
-  padding: 0 20px;
+  padding: 10px 20px;
   flex-wrap: wrap;
+  background-color: #FAD7A0;
+  max-width: 400px;
+  border-radius: 10px;
 }
 
 .btn-actualizar {
@@ -243,7 +246,6 @@
   cursor: pointer;
   font-weight: bold;
   transition: all 0.2s ease;
-  margin-top: 1.5rem;
 }
 
 .btn-actualizar:hover {

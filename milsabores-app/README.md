@@ -2,7 +2,7 @@
 
 Aplicación web de pastelería desarrollada con **React + Vite** que permite explorar productos, gestionar carrito de compras y administrar inventario.
 
-![Coverage](https://img.shields.io/badge/Coverage-89.52%25-brightgreen)
+![Coverage](https://img.shields.io/badge/Coverage-89.6%25-brightgreen)
 ![Tests](https://img.shields.io/badge/Tests-121%20passed-success)
 ![React](https://img.shields.io/badge/React-18.2.0-blue)
 ![Vite](https://img.shields.io/badge/Vite-5.0.0-orange)
