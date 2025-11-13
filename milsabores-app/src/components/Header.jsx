@@ -1,11 +1,14 @@
+import { useCarrito } from '../context/CarritoContext';
 import { Link } from "react-router-dom";
-import { useCarrito } from '../hooks/useCarrito.js';
 import logo_milsabores from '../assets/img/pasteleria-mil-sabores-logo-1.svg';
 import cartIcon from '../assets/img/shopping-cart.svg';
 import userIcon from '../assets/img/user-icon.png';
 
 function Header() {
-    const { totalItems } = useCarrito();
+    const { totalItems, carrito } = useCarrito();
+
+    console.log('CARRITO EN HEADER:', carrito);
+    console.log('TOTAL ITEMS EN HEADER:', totalItems);
 
     return <header>
         <div className="logo-container">
@@ -14,8 +17,10 @@ function Header() {
             </Link>
         </div>
         <div className="title">
-            <h1>Pastelería Mil Sabores</h1>
-            <p>50 años endulzando tus recuerdos</p>
+            <Link to="/">
+                <h1>Pastelería Mil Sabores</h1>
+                <p>50 años endulzando tus recuerdos</p>
+            </Link>
         </div>
         <div className="icons">
             <div className="cart-icon">
