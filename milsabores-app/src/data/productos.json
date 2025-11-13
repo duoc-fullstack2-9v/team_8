@@ -6,7 +6,7 @@
             "nombreProd": "Torta Cuadrada de Chocolate",
             "descProd": "Deliciosa torta de chocolate con capas de ganache y un toque de avellanas. Personalizable con mensajes especiales.",
             "precioProd": 45000,
-            "imagenProd": "./assets/img/torta-cuadrada-chocolate.jpg"
+            "imagenProd": "/src/assets/img/torta-cuadrada-chocolate.jpg"
         },
         {
             "idProd": 2,
@@ -14,7 +14,7 @@
             "nombreProd": "Torta Cuadrada de Frutas",
             "descProd": "Una mezcla de frutas frescas y crema chantilly sobre un suave bizcocho de vainilla, ideal para celebraciones.",
             "precioProd": 50000,
-            "imagenProd": "./assets/img/torta-cuadrada-frutas.webp"
+            "imagenProd": "/src/assets/img/torta-cuadrada-frutas.webp"
         },
         {
             "idProd": 3,
@@ -22,7 +22,7 @@
             "nombreProd": "Torta Circular de Vainilla",
             "descProd": "Bizcocho de vainilla clásico relleno con crema pastelera y cubierto con un glaseado dulce, perfecto para cualquier ocasión.",
             "precioProd": 40000,
-            "imagenProd": "./assets/img/torta-circular-vainilla.jpg"
+            "imagenProd": "/src/assets/img/torta-circular-vainilla.jpg"
         },
         {
             "idProd": 4,
@@ -30,7 +30,7 @@
             "nombreProd": "Torta Circular de Manjar",
             "descProd": "Torta tradicional chilena con manjar y nueces, un deleite para los amantes de los sabores dulces y clásicos.",
             "precioProd": 42000,
-            "imagenProd": "./assets/img/torta-circular-manjar.webp"
+            "imagenProd": "/src/assets/img/torta-circular-manjar.webp"
         },
         {
             "idProd": 5,
@@ -38,7 +38,7 @@
             "nombreProd": "Mousse de Chocolate",
             "descProd": "Postre individual cremoso y suave, hecho con chocolate de alta calidad, ideal para los amantes del chocolate.",
             "precioProd": 5000,
-            "imagenProd": "./assets/img/mousse-choc-ind.webp"
+            "imagenProd": "/src/assets/img/mousse-choc-ind.webp"
         },
         {
             "idProd": 6,
@@ -46,7 +46,7 @@
             "nombreProd": "Tiramisú Clásico",
             "descProd": "Un postre italiano individual con capas de café, mascarpone y cacao, perfecto para finalizar cualquier comida.",
             "precioProd": 5500,
-            "imagenProd": "./assets/img/tiramisu-ind.jpg"
+            "imagenProd": "/src/assets/img/tiramisu-ind.jpg"
         },
         {
             "idProd": 7,
@@ -54,7 +54,7 @@
             "nombreProd": "Torta Sin Azúcar Naranja",
             "descProd": "Torta ligera y deliciosa, endulzada naturalmente, ideal para quienes buscan opciones más saludables.",
             "precioProd": 48000,
-            "imagenProd": "./assets/img/torta-naranja.jpg"
+            "imagenProd": "/src/assets/img/torta-naranja.jpg"
         },
         {
             "idProd": 8,
@@ -62,7 +62,7 @@
             "nombreProd": "Cheesecake Sin Azúcar",
             "descProd": "Suave y cremoso, este cheesecake es una opción perfecta para disfrutar sin culpa.",
             "precioProd": 47000,
-            "imagenProd": "./assets/img/cheesecake-trad.avif"
+            "imagenProd": "/src/assets/img/cheesecake-trad.avif"
         },
         {
             "idProd": 9,
@@ -70,7 +70,7 @@
             "nombreProd": "Empanada de Manzana",
             "descProd": "Pastelería tradicional rellena de manzanas especiadas, perfecta para un dulce desayuno o merienda.",
             "precioProd": 3000,
-            "imagenProd": "./assets/img/empanada-de-manzanas.webp"
+            "imagenProd": "/src/assets/img/empanada-de-manzanas.webp"
         },
         {
             "idProd": 10,
@@ -78,7 +78,7 @@
             "nombreProd": "Tarta de Santiago",
             "descProd": "Tradicional tarta española hecha con almendras, azúcar, y huevos, una delicia para los amantes de los postres clásicos.",
             "precioProd": 6000,
-            "imagenProd": "./assets/img/tarta-de-santiago-1.webp"
+            "imagenProd": "/src/assets/img/tarta-de-santiago-1.webp"
         },
         {
             "idProd": 11,
@@ -86,7 +86,7 @@
             "nombreProd": "Brownie Sin Gluten",
             "descProd": "Rico y denso, este brownie es perfecto para quienes necesitan evitar el gluten sin sacrificar el sabor.",
             "precioProd": 4000,
-            "imagenProd": "./assets/img/brownie-choc.webp"
+            "imagenProd": "/src/assets/img/brownie-choc.webp"
         },
         {
             "idProd": 12,
@@ -94,7 +94,7 @@
             "nombreProd": "Pan Sin Gluten",
             "descProd": "Suave y esponjoso, ideal para sándwiches o para acompañar cualquier comida.",
             "precioProd": 3500,
-            "imagenProd": "./assets/img/pan-sin-gluten.webp"
+            "imagenProd": "/src/assets/img/pan-sin-gluten.webp"
         },
         {
             "idProd": 13,
@@ -102,7 +102,7 @@
             "nombreProd": "Torta Vegana de Chocolate",
             "descProd": "Torta de chocolate húmeda y deliciosa, hecha sin productos de origen animal, perfecta para veganos.",
             "precioProd": 50000,
-            "imagenProd": "./assets/img/torta-vegana-de-chocolate.jpg"
+            "imagenProd": "/src/assets/img/torta-vegana-de-chocolate.jpg"
         },
         {
             "idProd": 14,
@@ -110,7 +110,7 @@
             "nombreProd": "Galletas Veganas de Avena",
             "descProd": "Crujientes y sabrosas, estas galletas son una excelente opción para un snack saludable y vegano.",
             "precioProd": 4500,
-            "imagenProd": "./assets/img/galleta-veg-avena.jpg"
+            "imagenProd": "/src/assets/img/galleta-veg-avena.jpg"
         },
         {
             "idProd": 15,
@@ -118,7 +118,7 @@
             "nombreProd": "Torta Especial de Cumpleaños",
             "descProd": "Diseñada especialmente para celebraciones, personalizable con decoraciones y mensajes únicos.",
             "precioProd": 55000,
-            "imagenProd": "./assets/img/torta-personalizada-cumple.webp"
+            "imagenProd": "/src/assets/img/torta-personalizada-cumple.webp"
         },
         {
             "idProd": 16,
@@ -126,7 +126,7 @@
             "nombreProd": "Torta Especial de Bodas",
             "descProd": "Elegante y deliciosa, esta torta está diseñada para ser el centro de atención en cualquier boda.",
             "precioProd": 60000,
-            "imagenProd": "./assets/img/torta-de-matrimonio.jpg"
+            "imagenProd": "/src/assets/img/torta-de-matrimonio.jpg"
         }
     ]
 

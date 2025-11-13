@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 import { BrowserRouter } from 'react-router-dom';
 import Inicio from '../src/pages/Inicio';
@@ -46,21 +46,39 @@ vi.mock('../src/components/ProductoCard', () => ({
   ),
 }));
 
-// Mock de los datos de productos
-vi.mock('../src/data/productos.js', () => ({
-  productos: [
-    { idProd: 2, nombreProd: 'Torta Cuadrada de Frutas', precioProd: 50000 },
-    { idProd: 4, nombreProd: 'Torta Circular de Manjar', precioProd: 42000 },
-    { idProd: 7, nombreProd: 'Torta Sin Azúcar Naranja', precioProd: 48000 },
-    { idProd: 8, nombreProd: 'Cheesecake Sin Azúcar', precioProd: 47000 },
-    { idProd: 9, nombreProd: 'Empanada de Manzana', precioProd: 3000 },
-    { idProd: 14, nombreProd: 'Galletas Veganas de Avena', precioProd: 4500 },
-  ],
+// Mock de la API y servicios
+const mockProductosDestacados = [
+  { idProd: 2, nombreProd: 'Torta Cuadrada de Frutas', precioProd: 50000, productoDestacado: true },
+  { idProd: 4, nombreProd: 'Torta Circular de Manjar', precioProd: 42000, productoDestacado: true },
+  { idProd: 7, nombreProd: 'Torta Sin Azúcar Naranja', precioProd: 48000, productoDestacado: true },
+  { idProd: 8, nombreProd: 'Cheesecake Sin Azúcar', precioProd: 47000, productoDestacado: true },
+  { idProd: 9, nombreProd: 'Empanada de Manzana', precioProd: 3000, productoDestacado: true },
+  { idProd: 14, nombreProd: 'Galletas Veganas de Avena', precioProd: 4500, productoDestacado: true },
+];
+
+const mockTodosLosProductos = [
+  ...mockProductosDestacados,
+  { idProd: 1, nombreProd: 'Producto No Destacado', precioProd: 10000, productoDestacado: false },
+  { idProd: 3, nombreProd: 'Otro Producto No Destacado', precioProd: 15000, productoDestacado: false },
+];
+
+// Mock de la API
+vi.mock('../src/services/ProductosService', () => ({
+  api: {
+    getProductos: vi.fn(),
+  },
+  getProductosAdmin: vi.fn(),
 }));
+
+import { api, getProductosAdmin } from '../src/services/ProductosService';
 
 describe('Página Inicio', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    
+    // Configurar mocks por defecto
+    api.getProductos.mockResolvedValue(mockTodosLosProductos);
+    getProductosAdmin.mockReturnValue(mockProductosDestacados);
   });
 
   const renderInicio = () => {
@@ -71,63 +89,111 @@ describe('Página Inicio', () => {
     );
   };
 
-  it('renderiza todos los componentes principales', () => {
+  it('renderiza todos los componentes principales', async () => {
     renderInicio();
 
-    expect(screen.getByTestId('mock-header')).toBeInTheDocument();
-    expect(screen.getByTestId('mock-navbar')).toBeInTheDocument();
-    expect(screen.getByTestId('mock-hero-banner')).toBeInTheDocument();
-    expect(screen.getByTestId('mock-footer')).toBeInTheDocument();
+    // Usar waitFor porque ahora es asíncrono
+    await waitFor(() => {
+      expect(screen.getByTestId('mock-header')).toBeInTheDocument();
+      expect(screen.getByTestId('mock-navbar')).toBeInTheDocument();
+      expect(screen.getByTestId('mock-hero-banner')).toBeInTheDocument();
+      expect(screen.getByTestId('mock-footer')).toBeInTheDocument();
+    });
   });
 
-  it('muestra el hero banner con título y subtítulo correctos', () => {
+  it('muestra el hero banner con título y subtítulo correctos', async () => {
     renderInicio();
 
-    expect(screen.getByText('Bienvenidos a Pastelería Mil Sabores')).toBeInTheDocument();
-    expect(screen.getByText('¡Ahora estamos a un paso más cerca de ti!')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('Bienvenidos a Pastelería Mil Sabores')).toBeInTheDocument();
+      expect(screen.getByText('¡Ahora estamos a un paso más cerca de ti!')).toBeInTheDocument();
+    });
   });
 
-  it('muestra la sección de productos destacados', () => {
+  it('muestra la sección de productos destacados', async () => {
     renderInicio();
 
-    expect(screen.getByText('Productos Destacados')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('Productos Destacados')).toBeInTheDocument();
+    });
   });
 
-  it('renderiza los 6 productos destacados', () => {
+  it('renderiza los 6 productos destacados desde la API', async () => {
     renderInicio();
 
     // Verificar que se renderizan los 6 productos destacados
-    expect(screen.getByTestId('producto-card-2')).toBeInTheDocument();
-    expect(screen.getByTestId('producto-card-4')).toBeInTheDocument();
-    expect(screen.getByTestId('producto-card-7')).toBeInTheDocument();
-    expect(screen.getByTestId('producto-card-8')).toBeInTheDocument();
-    expect(screen.getByTestId('producto-card-9')).toBeInTheDocument();
-    expect(screen.getByTestId('producto-card-14')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByTestId('producto-card-2')).toBeInTheDocument();
+      expect(screen.getByTestId('producto-card-4')).toBeInTheDocument();
+      expect(screen.getByTestId('producto-card-7')).toBeInTheDocument();
+      expect(screen.getByTestId('producto-card-8')).toBeInTheDocument();
+      expect(screen.getByTestId('producto-card-9')).toBeInTheDocument();
+      expect(screen.getByTestId('producto-card-14')).toBeInTheDocument();
+    });
+
+    // Verificar que se llamó a la API
+    expect(api.getProductos).toHaveBeenCalledTimes(1);
   });
 
-  it('muestra los nombres de los productos destacados', () => {
+  it('muestra los nombres de los productos destacados', async () => {
     renderInicio();
 
-    expect(screen.getByText('Torta Cuadrada de Frutas')).toBeInTheDocument();
-    expect(screen.getByText('Torta Circular de Manjar')).toBeInTheDocument();
-    expect(screen.getByText('Torta Sin Azúcar Naranja')).toBeInTheDocument();
-    expect(screen.getByText('Cheesecake Sin Azúcar')).toBeInTheDocument();
-    expect(screen.getByText('Empanada de Manzana')).toBeInTheDocument();
-    expect(screen.getByText('Galletas Veganas de Avena')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('Torta Cuadrada de Frutas')).toBeInTheDocument();
+      expect(screen.getByText('Torta Circular de Manjar')).toBeInTheDocument();
+      expect(screen.getByText('Torta Sin Azúcar Naranja')).toBeInTheDocument();
+      expect(screen.getByText('Cheesecake Sin Azúcar')).toBeInTheDocument();
+      expect(screen.getByText('Empanada de Manzana')).toBeInTheDocument();
+      expect(screen.getByText('Galletas Veganas de Avena')).toBeInTheDocument();
+    });
   });
 
-  it('muestra el iframe de Spotify', () => {
+  it('usa fallback local cuando la API falla', async () => {
+    // Simular error en la API
+    api.getProductos.mockRejectedValue(new Error('API Error'));
+
     renderInicio();
 
-    const iframe = screen.getByTitle('Playlist Spotify Mil Sabores');
-    expect(iframe).toBeInTheDocument();
-    expect(iframe).toHaveAttribute('src', 'https://open.spotify.com/embed/playlist/0zu1O3HiwPYjV2hy9xHYOm?utm_source=generator');
+    // Debería usar el fallback local
+    await waitFor(() => {
+      expect(screen.getByText('Torta Cuadrada de Frutas')).toBeInTheDocument();
+      expect(getProductosAdmin).toHaveBeenCalledTimes(1);
+    });
   });
 
-  it('muestra la descripción de la playlist', () => {
+  it('muestra estado de carga inicialmente', async () => {
+    // Retrasar la respuesta de la API
+    api.getProductos.mockImplementation(() => new Promise(resolve => 
+      setTimeout(() => resolve(mockTodosLosProductos), 100)
+    ));
+
     renderInicio();
 
-    expect(screen.getByText(/Playlist mensual curada por nuestro #TeamMilSabores/i)).toBeInTheDocument();
-    expect(screen.getByText(/Visita nuestras sucursales ubicadas en la quinta costa/i)).toBeInTheDocument();
+    // Debería mostrar loading inicialmente
+    expect(screen.getByText('🔄 Cargando productos destacados...')).toBeInTheDocument();
+
+    // Luego debería mostrar los productos
+    await waitFor(() => {
+      expect(screen.getByText('Torta Cuadrada de Frutas')).toBeInTheDocument();
+    });
+  });
+
+  it('muestra el iframe de Spotify', async () => {
+    renderInicio();
+
+    await waitFor(() => {
+      const iframe = screen.getByTitle('Playlist Spotify Mil Sabores');
+      expect(iframe).toBeInTheDocument();
+      expect(iframe).toHaveAttribute('src', 'https://open.spotify.com/embed/playlist/0zu1O3HiwPYjV2hy9xHYOm?utm_source=generator');
+    });
+  });
+
+  it('muestra la descripción de la playlist', async () => {
+    renderInicio();
+
+    await waitFor(() => {
+      expect(screen.getByText(/Playlist mensual curada por nuestro #TeamMilSabores/i)).toBeInTheDocument();
+      expect(screen.getByText(/Visita nuestras sucursales ubicadas en la quinta costa/i)).toBeInTheDocument();
+    });
   });
 });

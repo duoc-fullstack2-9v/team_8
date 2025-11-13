@@ -4,20 +4,70 @@ import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import HeroBanner from '../components/HeroBanner';
-import { getProductosAdmin } from '../services/ProductosService'; 
+import { getProductosAdmin, api } from '../services/ProductosService'; 
 import '../styles/Inicio.css';
-import '../styles/Catalogo.css'
-
-const productosDestacadosIds = [4, 2, 8, 14, 9, 7];
+import '../styles/Catalogo.css';
+import { useState, useEffect } from 'react';
 
 function Inicio() {
     console.log("Página de Inicio");
     const { agregarCarrito, mostrarMensaje, mensajeTexto } = useCarrito();
 
-    // Obtener productos actualizados del admin
-    const productos = getProductosAdmin(); 
+    // Estados para productos destacados
+    const [productosDestacados, setProductosDestacados] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    const productosDestacados = productos.filter(producto => productosDestacadosIds.includes(producto.idProd));
+    // Cargar productos destacados desde la API
+    useEffect(() => {
+        const cargarProductosDestacados = async () => {
+            try {
+                console.log('🎯 Cargando productos destacados desde API...');
+                
+                // Obtener todos los productos de la API
+                const todosLosProductos = await api.getProductos();
+                console.log('📦 Total productos recibidos:', todosLosProductos.length);
+                
+                // Filtrar solo los productos destacados
+                const destacados = todosLosProductos.filter(producto => 
+                    producto.productoDestacado === true
+                );
+                
+                console.log('⭐ Productos destacados encontrados:', destacados.length);
+                console.log('🏷️ IDs de productos destacados:', destacados.map(p => p.idProd));
+                
+                setProductosDestacados(destacados);
+                
+            } catch (error) {
+                console.error('❌ Error cargando productos destacados:', error);
+                // Fallback a datos locales con la lógica original
+                console.log('🔄 Usando datos locales como fallback...');
+                const productos = getProductosAdmin();
+                const productosDestacadosIds = [4, 2, 8, 14, 9, 7];
+                const destacadosFallback = productos.filter(producto => 
+                    productosDestacadosIds.includes(producto.idProd)
+                );
+                setProductosDestacados(destacadosFallback);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        cargarProductosDestacados();
+    }, []);
+
+    if (loading) {
+        return (
+            <>
+                <Header />
+                <Navbar />
+                <HeroBanner titulo="Bienvenidos a Pastelería Mil Sabores" subtitulo="¡Ahora estamos a un paso más cerca de ti!" />
+                <div className="cargando">
+                    <p>🔄 Cargando productos destacados...</p>
+                </div>
+                <Footer />
+            </>
+        );
+    }
 
     return (
         <>
@@ -38,6 +88,12 @@ function Inicio() {
                                 </div>
                             ))}
                         </div>
+                        
+                        {productosDestacados.length === 0 && (
+                            <div className="sin-destacados">
+                                <p>No hay productos destacados en este momento.</p>
+                            </div>
+                        )}
                     </section>
 
                     <aside className="playlistMensual">
@@ -61,7 +117,6 @@ function Inicio() {
                 </div>
             </main>
             <Footer />
-
         </>
     );
 }

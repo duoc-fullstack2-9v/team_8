@@ -1,6 +1,47 @@
 import productosData from '../data/productos.json';
 
-// Para mantener compatibilidad total
+const API_BASE_URL = 'http://localhost:8080/api/v1';
+
+// ===== FUNCIONES DE API =====
+const apiService = {
+  // Obtener todos los productos desde la API
+  getProductosFromAPI: async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/productos`);
+      if (!response.ok) throw new Error('Error al obtener productos');
+      return await response.json();
+    } catch (error) {
+      console.error('Error API, usando datos locales:', error);
+      return productosData.productos; // Fallback
+    }
+  },
+
+  // Obtener productos por categoría desde API
+  getProductosByCategoriaFromAPI: async (categoria) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/productos/categoria/${encodeURIComponent(categoria)}`);
+      if (!response.ok) throw new Error('Error al obtener categoría');
+      return await response.json();
+    } catch (error) {
+      console.error('Error API, usando datos locales:', error);
+      return productosData.productos.filter(p => p.categProd === categoria);
+    }
+  },
+
+  // Obtener producto por ID desde API
+  getProductoByIdFromAPI: async (id) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/productos/${id}`);
+      if (!response.ok) throw new Error('Producto no encontrado');
+      return await response.json();
+    } catch (error) {
+      console.error('Error API, usando datos locales:', error);
+      return productosData.productos.find(p => p.idProd === id);
+    }
+  }
+};
+
+// ===== FUNCIONES LOCALES =====
 export const productos = productosData.productos;
 
 export const categoriaProductos = {
@@ -14,6 +55,7 @@ export const categoriaProductos = {
   "Tortas Especiales": productos.filter(p => p.categProd === "Tortas Especiales")
 };
 
+// Funciones existentes SIN cambios
 export const getProductoById = (id) => {
   return productos.find(producto => producto.idProd === id);
 };
@@ -23,7 +65,7 @@ export const getProductosByCategoria = (categoria) => {
   return productos.filter(producto => producto.categProd === categoria);
 };
 
-//Funciones para dashboard de administración
+// Funciones para dashboard de administración (SIN cambios)
 export const getProductosAdmin = () => {
   const productosModificados = localStorage.getItem('productos-admin');
   return productosModificados ? JSON.parse(productosModificados) : [...productos];
@@ -36,12 +78,10 @@ export const saveProductosAdmin = (nuevosProductos) => {
 export const agregarProducto = (nuevoProducto) => {
   const productosActuales = getProductosAdmin();
   const maxId = Math.max(...productosActuales.map(p => p.idProd), 0);
-
   const productoConId = {
     ...nuevoProducto,
     idProd: maxId + 1
   };
-
   productosActuales.push(productoConId);
   saveProductosAdmin(productosActuales);
   return productoConId;
@@ -50,7 +90,6 @@ export const agregarProducto = (nuevoProducto) => {
 export const editarProducto = (id, productoActualizado) => {
   const productosActuales = getProductosAdmin();
   const index = productosActuales.findIndex(p => p.idProd === id);
-
   if (index !== -1) {
     productosActuales[index] = { ...productosActuales[index], ...productoActualizado };
     saveProductosAdmin(productosActuales);
@@ -74,5 +113,13 @@ export const restaurarProductosBase = () => {
 export const getCategorias = () => {
   const productos = getProductosAdmin();
   return [...new Set(productos.map(p => p.categProd))];
+};
+
+// ===== FUNCIONES NUEVAS PARA API =====
+export const api = {
+  // Para componentes que quieran usar la API
+  getProductos: apiService.getProductosFromAPI,
+  getProductosByCategoria: apiService.getProductosByCategoriaFromAPI,
+  getProductoById: apiService.getProductoByIdFromAPI
 };
 
