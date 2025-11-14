@@ -38,7 +38,7 @@ Aplicación web de pastelería desarrollada con **React + Vite** que permite exp
 - **Ruteo:** React Router para navegación SPA
 - **Testing:** Vitest + Testing Library para tests unitarios e integración
 - **Build:** Vite para desarrollo rápido y builds optimizados
-- **Calidad:** 88.57% de cobertura garantiza código confiable
+- **Calidad:** 90.32% de cobertura garantiza código confiable
 
 
 ## 📦 Instalación
