@@ -9,6 +9,8 @@ import Producto from './pages/Producto.jsx'
 import QuienesSomos from './pages/QuienesSomos.jsx'
 import RegistroUser from './pages/RegistroUser.jsx'
 import AdminDashboard from './pages/AdminDashboard.jsx'
+import ProductosAdminPage from './pages/ProductosAdminPage.jsx'
+import UsuariosAdminPage from './pages/UsuariosAdminPage.jsx'
 import MensajeFlotante from './components/MensajeFlotante.jsx'
 
 
@@ -28,6 +30,8 @@ function App() {
           <Route path="/quienes_somos" element={<QuienesSomos />} />
           <Route path="/registro_user" element={<RegistroUser />} />
           <Route path="/admin_dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/productos" element={<ProductosAdminPage />} />
+          <Route path="/admin/usuarios" element={<UsuariosAdminPage />} />
         </Routes>
     </>  
   )

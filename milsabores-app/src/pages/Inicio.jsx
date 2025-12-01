@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import HeroBanner from '../components/HeroBanner';
-import { getProductosAdmin, api } from '../services/ProductosService'; 
+import { api } from '../services/ProductosService'; 
 import '../styles/Inicio.css';
 import '../styles/Catalogo.css';
 import { useState, useEffect } from 'react';

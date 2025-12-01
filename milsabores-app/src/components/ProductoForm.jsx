@@ -7,7 +7,8 @@ const ProductoForm = ({ producto, onSave, onCancel }) => {
     descProd: '',
     precioProd: '',
     categProd: '',
-    imagenProd: ''
+    imagenProd: '',
+    productoDestacado: false, // ✅ nuevo campo para el home
   });
 
   useEffect(() => {
@@ -15,24 +16,35 @@ const ProductoForm = ({ producto, onSave, onCancel }) => {
       setFormData({
         nombreProd: producto.nombreProd || '',
         descProd: producto.descProd || '',
-        precioProd: producto.precioProd || '',
+        precioProd: producto.precioProd ?? '', // si viene número, lo mostramos igual
         categProd: producto.categProd || '',
-        imagenProd: producto.imagenProd || ''
+        imagenProd: producto.imagenProd || '',
+        productoDestacado: Boolean(producto.productoDestacado), // asegura boolean
+      });
+    } else {
+      setFormData({
+        nombreProd: '',
+        descProd: '',
+        precioProd: '',
+        categProd: '',
+        imagenProd: '',
+        productoDestacado: false,
       });
     }
   }, [producto]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
+    const { name, value, type, checked } = e.target;
+
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: type === 'checkbox' ? checked : value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (!formData.nombreProd || !formData.precioProd || !formData.categProd) {
       alert('Por favor completa los campos obligatorios: Nombre, Precio y Categoría');
       return;
@@ -40,7 +52,8 @@ const ProductoForm = ({ producto, onSave, onCancel }) => {
 
     const productoData = {
       ...formData,
-      precioProd: Number(formData.precioProd)
+      precioProd: Number(formData.precioProd), // ✅ número para el backend
+      productoDestacado: Boolean(formData.productoDestacado),
     };
 
     onSave(productoData);
@@ -48,20 +61,20 @@ const ProductoForm = ({ producto, onSave, onCancel }) => {
 
   const categorias = [
     'Tortas Cuadradas',
-    'Tortas Circulares', 
+    'Tortas Circulares',
     'Postres Individuales',
     'Productos Sin Azúcar',
     'Pastelería Tradicional',
     'Producto Sin Gluten',
     'Productos Veganos',
-    'Tortas Especiales'
+    'Tortas Especiales',
   ];
 
   return (
     <div className="producto-form-overlay">
       <div className="producto-form-modal">
         <h2>{producto ? '✏️ Editar Producto' : '➕ Agregar Nuevo Producto'}</h2>
-        
+
         <form onSubmit={handleSubmit} className="producto-form">
           <div className="form-group">
             <label htmlFor="nombreProd">Nombre del Producto *</label>
@@ -112,7 +125,7 @@ const ProductoForm = ({ producto, onSave, onCancel }) => {
               required
             >
               <option value="">Selecciona una categoría</option>
-              {categorias.map(categoria => (
+              {categorias.map((categoria) => (
                 <option key={categoria} value={categoria}>
                   {categoria}
                 </option>
@@ -130,6 +143,19 @@ const ProductoForm = ({ producto, onSave, onCancel }) => {
               onChange={handleChange}
               placeholder="/img/nombre-imagen.jpg"
             />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="productoDestacado">
+              <input
+                id="productoDestacado"
+                type="checkbox"
+                name="productoDestacado"
+                checked={formData.productoDestacado}
+                onChange={handleChange}
+              />{' '}
+              Marcar como producto destacado (aparece en la página de inicio)
+            </label>
           </div>
 
           <div className="form-actions">

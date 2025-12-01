@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { loginRequest } from '../services/AuthService'; // ⬅️ nuevo import
 
 const Login = ({ onNavigate }) => {
     const [emailUser, setEmailUser] = useState('');
@@ -37,37 +38,60 @@ const Login = ({ onNavigate }) => {
         return true;
     };
 
-    const login = () => {
+    const login = async () => {
         // Validar antes de procesar login
         if (!validarCampos()) return;
 
-        const adminCredentials = {
-            email: 'admin@milsabores.cl',
-            password: 'admin123'
-        };
+        try {
+            // 🔐 Llamamos al backend (JWT)
+            const data = await loginRequest(emailUser, password);
 
-        if (emailUser === adminCredentials.email && password === adminCredentials.password) {
-            localStorage.setItem('sesionActiva', 'admin');
-            localStorage.setItem('userRole', 'admin');
-            alert('¡Bienvenido Administrador!');
-            navigate('/admin_dashboard');
-            return;
-        }
+            console.log('Respuesta login backend:', data);
 
-        const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
-        const usuarioEncontrado = usuarios.find(
-            (u) => u.emailUser === emailUser && u.password === password
-        );
+            const token = data.token;              // OK según tu respuesta
+            const usuario = data.usuario || {};    // 👈 viene acá
+            const rolBackend = usuario.rolUsuario; // "ADMIN" o "CLIENTE"
 
-        if (usuarioEncontrado) {
-            localStorage.setItem('sesionActiva', emailUser);
-            localStorage.setItem('userRole', 'user');
-            alert(`¡Bienvenido ${usuarioEncontrado.nomUser}!`);
-            navigate('/');
-        } else {
+            console.log('rolBackend recibido:', rolBackend);
+
+            const nombre = usuario.nombreUsuario || emailUser;
+
+            // rolBackend puede ser "ADMIN" (según lo que mostraste)
+            const esAdmin =
+                rolBackend === 'ADMIN' ||
+                rolBackend === 'ROLE_ADMIN';
+
+            // Rol que usará tu frontend (tus guards usan 'admin'/'user')
+            const rolFront = esAdmin ? 'admin' : 'user';
+
+            console.log('rolFront asignado:', rolFront);
+
+            // Guardar datos en localStorage (para toda la app)
+            localStorage.setItem('token', token); // para axios + SecurityConfig
+
+            // Para mantener compatibilidad con tu lógica antigua:
+            if (rolFront === 'admin') {
+                localStorage.setItem('sesionActiva', 'admin'); // antes lo hacías así
+            } else {
+                localStorage.setItem('sesionActiva', emailUser);
+            }
+
+            localStorage.setItem('userRole', rolFront); // 'admin' o 'user'
+
+            if (rolFront === 'admin') {
+                alert('¡Bienvenido Administrador!');
+                // 👇 usa la ruta REAL de tu dashboard:
+                navigate('/admin_dashboard'); // o '/admin' si tu ruta es esa
+            } else {
+                alert(`¡Bienvenido ${nombre}!`);
+                navigate('/');
+            }
+        } catch (error) {
+            console.error('Error en login', error);
             setMensaje('Correo y/o contraseña incorrecta. Intente nuevamente.');
         }
     };
+
 
     return (
         <div className="login-container">
@@ -90,8 +114,8 @@ const Login = ({ onNavigate }) => {
             <button onClick={() => onNavigate('registro')}>Crear cuenta</button>
             
             <div className="admin-access" style={{ opacity: 0.3, fontSize: '12px', marginTop: '10px' }}>
-                <span title="Credenciales: admin@milsabores.cl / admin123">
-                    Acceso Administrador
+                <span>
+                    Acceso Administrador (usa tu cuenta ADMIN registrada)
                 </span>
             </div>
 

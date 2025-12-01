@@ -1,7 +1,8 @@
+// src/pages/Catalogo.jsx
 import { useCarrito } from '../context/CarritoContext';
 import ProductoCard from '../components/ProductoCard';
-import { getProductosByCategoria, api } from '../services/ProductosService';
-import FiltroCategorias from '../components/FiltroCategorias'; 
+import { api } from '../services/ProductosService';
+import FiltroCategorias from '../components/FiltroCategorias';
 import '../styles/Catalogo.css';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
@@ -11,97 +12,74 @@ import { useState, useEffect } from 'react';
 
 function Catalogo() {
   const { agregarCarrito, mostrarMensaje, mensajeTexto } = useCarrito();
-  
-  // Estado para el filtro
+
   const [categoriaFiltro, setCategoriaFiltro] = useState('');
-  const [categoriaProductos, setCategoriaProductos] = useState({
-    "Tortas Cuadradas": [],
-    "Tortas Circulares": [],
-    "Postres Individuales": [],
-    "Productos Sin Azúcar": [],
-    "Pastelería Tradicional": [],
-    "Producto Sin Gluten": [],
-    "Productos Veganos": [],
-    "Tortas Especiales": []
-  });
+  const [productos, setProductos] = useState([]);
+  const [categorias, setCategorias] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Cargar productos desde la API al montar el componente
+  // Mapa de emojis por categoría (opcional, para mantener tu estética 🧁)
+  const emojiPorCategoria = {
+    'Tortas Cuadradas': '🍰',
+    'Tortas Circulares': '🎂',
+    'Postres Individuales': '🍪',
+    'Productos Sin Azúcar': '🥯',
+    'Pastelería Tradicional': '🥐',
+    'Producto Sin Gluten': '🥞',
+    'Productos Veganos': '🥕',
+    'Tortas Especiales': '🧁',
+  };
+
   useEffect(() => {
     cargarProductosDesdeAPI();
   }, []);
 
-  // Función para cargar productos desde la API
   const cargarProductosDesdeAPI = async () => {
     try {
       setLoading(true);
       console.log('Cargando productos desde API...');
-      
-      // Obtener todos los productos de la API
+
       const productosAPI = await api.getProductos();
       console.log('Productos recibidos desde API:', productosAPI);
 
-      if(productosAPI && productosAPI.length > 0) {
-        // Agrupar por categorías solo usando datos API
-        const categoriasAgrupadas = {
-          "Tortas Cuadradas": productosAPI.filter(p => p.categProd === "Tortas Cuadradas"),
-          "Tortas Circulares": productosAPI.filter(p => p.categProd === "Tortas Circulares"),
-          "Postres Individuales": productosAPI.filter(p => p.categProd === "Postres Individuales"),
-          "Productos Sin Azúcar": productosAPI.filter(p => p.categProd === "Productos Sin Azúcar"),
-          "Pastelería Tradicional": productosAPI.filter(p => p.categProd === "Pastelería Tradicional"),
-          "Producto Sin Gluten": productosAPI.filter(p => p.categProd === "Producto Sin Gluten"),
-          "Productos Veganos": productosAPI.filter(p => p.categProd === "Productos Veganos"),
-          "Tortas Especiales": productosAPI.filter(p => p.categProd === "Tortas Especiales")
-        };
+      setProductos(productosAPI || []);
 
-        setCategoriaProductos(categoriasAgrupadas);
-        console.log('Productos agrupados por categoría desde API:', categoriasAgrupadas);
-      } else {
-        // Solo si la API falla completamente, usar datos locales
-        console.log('API devolvió datos vacíos, usando datos locales');
-        cargarProductosLocales();
-      }      
+      // Categorías dinámicas según lo que venga de la API
+      const categoriasUnicas = [
+        ...new Set((productosAPI || []).map((p) => p.categProd)),
+      ];
+      setCategorias(categoriasUnicas);
+
+      console.log('Categorías detectadas:', categoriasUnicas);
     } catch (error) {
-      console.error('Error cargando productos desde API:', error);
-      // Fallback a datos locales
-      console.log('Usando datos locales como fallback...');
-      cargarProductosLocales();
+      console.error('Error cargando productos desde API (con fallback manejado en service):', error);
     } finally {
       setLoading(false);
     }
   };
 
-  // Función fallback para cargar productos locales
-  const cargarProductosLocales = () => {
-    setCategoriaProductos({
-      "Tortas Cuadradas": getProductosByCategoria("Tortas Cuadradas"),
-      "Tortas Circulares": getProductosByCategoria("Tortas Circulares"), 
-      "Postres Individuales": getProductosByCategoria("Postres Individuales"),
-      "Productos Sin Azúcar": getProductosByCategoria("Productos Sin Azúcar"),
-      "Pastelería Tradicional": getProductosByCategoria("Pastelería Tradicional"),
-      "Producto Sin Gluten": getProductosByCategoria("Producto Sin Gluten"),
-      "Productos Veganos": getProductosByCategoria("Productos Veganos"),
-      "Tortas Especiales": getProductosByCategoria("Tortas Especiales")
-    });
-  };
-
-  // Función para renderizar sección condicionalmente
-  const renderSeccion = (categoria, titulo, emoji) => {
+  // Renderizar una sección por categoría
+  const renderSeccion = (categoria) => {
     if (categoriaFiltro && categoriaFiltro !== categoria) {
       return null;
     }
-    
-    const productosCategoria = categoriaProductos[categoria] || [];
-    
+
+    const productosCategoria = productos.filter(
+      (producto) => producto.categProd === categoria
+    );
+
+    if (productosCategoria.length === 0) return null;
+
+    const emoji = emojiPorCategoria[categoria] || '🍰';
+
     return (
       <section className="categoria" key={categoria}>
-        <h2 className="titulo-categoria">{emoji} {titulo} {emoji}</h2>
+        <h2 className="titulo-categoria">
+          {emoji} {categoria} {emoji}
+        </h2>
         <div className="grid">
-          {productosCategoria.map(producto => (
-            <ProductoCard
-              key={producto.idProd}
-              producto={producto}
-            />
+          {productosCategoria.map((producto) => (
+            <ProductoCard key={producto.idProd} producto={producto} />
           ))}
         </div>
       </section>
@@ -113,7 +91,10 @@ function Catalogo() {
       <>
         <Header />
         <Navbar />
-        <HeroBanner titulo="Catálogo de Productos" subtitulo="Descubre nuestra variedad de pasteles y posteres artesanales" />
+        <HeroBanner
+          titulo="Catálogo de Productos"
+          subtitulo="Descubre nuestra variedad de pasteles y postres artesanales"
+        />
         <div className="cargando">
           <p>🔄 Cargando productos desde la base de datos...</p>
         </div>
@@ -122,17 +103,24 @@ function Catalogo() {
     );
   }
 
-  return ( 
+  const hayProductosEnFiltro =
+    !categoriaFiltro ||
+    productos.some((p) => p.categProd === categoriaFiltro);
+
+  return (
     <>
       <Header />
       <Navbar />
-      <HeroBanner titulo="Catálogo de Productos" subtitulo="Descubre nuestra variedad de pasteles y posteres artesanales" />
+      <HeroBanner
+        titulo="Catálogo de Productos"
+        subtitulo="Descubre nuestra variedad de pasteles y postres artesanales"
+      />
 
       <main>
-        {/* ✅ Filtro en el catálogo */}
+        {/* Filtro en el catálogo */}
         <div className="filtro-catalogo-container">
-          <FiltroCategorias 
-            categorias={Object.keys(categoriaProductos)}
+          <FiltroCategorias
+            categorias={categorias}
             categoriaSeleccionada={categoriaFiltro}
             onCategoriaChange={setCategoriaFiltro}
             className="filtro-catalogo"
@@ -143,16 +131,11 @@ function Catalogo() {
           </button>
         </div>
 
-        {renderSeccion("Tortas Cuadradas", "Tortas Cuadradas", "🍰")}
-        {renderSeccion("Tortas Circulares", "Tortas Circulares", "🎂")}
-        {renderSeccion("Postres Individuales", "Postres Individuales", "🍪")}
-        {renderSeccion("Productos Sin Azúcar", "Productos Sin Azúcar", "🥯")}
-        {renderSeccion("Pastelería Tradicional", "Pastelería Tradicional", "🥐")}
-        {renderSeccion("Producto Sin Gluten", "Producto Sin Gluten", "🥞")}
-        {renderSeccion("Productos Veganos", "Productos Veganos", "🥕")}
-        {renderSeccion("Tortas Especiales", "Tortas Especiales", "🧁")}
+        {/* Secciones por categoría */}
+        {categorias.map((categoria) => renderSeccion(categoria))}
 
-        {categoriaFiltro && categoriaProductos[categoriaFiltro]?.length === 0 && (
+        {/* Mensaje si el filtro no tiene resultados */}
+        {categoriaFiltro && !hayProductosEnFiltro && (
           <div className="sin-resultados">
             <p>No hay productos en la categoría seleccionada.</p>
           </div>
@@ -160,7 +143,7 @@ function Catalogo() {
       </main>
 
       <Footer />
-    </>    
+    </>
   );
 }
 
