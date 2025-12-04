@@ -2,6 +2,7 @@ import { describe, test, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import LoginPage from '../src/pages/LoginPage';
+import userEvent from '@testing-library/user-event';
 
 // Mocks
 vi.mock('../src/components/Header', () => ({
@@ -56,12 +57,17 @@ describe('Página LoginPage', () => {
     expect(screen.getByTestId('mock-login')).toBeInTheDocument();
   });
 
-  test('navega a registro cuando se llama a onNavigate', () => {
+  test('cuando Login llama onNavigate("registro"), navega a /registro_user', async () => {
+    const user = userEvent.setup();
     renderLoginPage();
-    
-    const botonRegistro = screen.getByText('Registro');
-    botonRegistro.click();
-    
+
+    const btnIrRegistro = screen.getByRole('button', {
+      name: /registro/i,
+    });
+
+    await user.click(btnIrRegistro);
+
     expect(mockNavigate).toHaveBeenCalledWith('/registro_user');
   });
+
 });

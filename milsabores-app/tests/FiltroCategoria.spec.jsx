@@ -1,4 +1,4 @@
-import { describe, test, expect, vi } from 'vitest';
+import { describe, test, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import FiltroCategorias from '../src/components/FiltroCategorias.jsx';
@@ -10,7 +10,7 @@ describe('Componente FiltroCategorias', () => {
   const defaultProps = {
     categorias: categoriasMock,
     categoriaSeleccionada: '',
-    onCategoriaChange: mockOnCategoriaChange
+    onCategoriaChange: mockOnCategoriaChange,
   };
 
   const renderFiltro = (props = {}) => {
@@ -24,26 +24,34 @@ describe('Componente FiltroCategorias', () => {
   test('renderiza el componente correctamente', () => {
     renderFiltro();
     
-    expect(screen.getByText('Filtrar por categoría:')).toBeInTheDocument();
-    expect(screen.getByRole('combobox')).toBeInTheDocument();
+    expect(
+      screen.getByText('Filtrar por categoría:')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('combobox')
+    ).toBeInTheDocument();
   });
 
   test('muestra la opción "Todas las categorías" por defecto', () => {
     renderFiltro();
     
-    expect(screen.getByText('Todas las categorías')).toBeInTheDocument();
+    expect(
+      screen.getByText('Todas las categorías')
+    ).toBeInTheDocument();
   });
 
   test('puede ocultar la opción "Todas las categorías"', () => {
     renderFiltro({ mostrarTodas: false });
     
-    expect(screen.queryByText('Todas las categorías')).not.toBeInTheDocument();
+    expect(
+      screen.queryByText('Todas las categorías')
+    ).not.toBeInTheDocument();
   });
 
   test('muestra todas las categorías proporcionadas', () => {
     renderFiltro();
     
-    categoriasMock.forEach(categoria => {
+    categoriasMock.forEach((categoria) => {
       expect(screen.getByText(categoria)).toBeInTheDocument();
     });
   });
@@ -68,7 +76,9 @@ describe('Componente FiltroCategorias', () => {
   test('permite personalizar el label', () => {
     renderFiltro({ label: 'Filtrar por:' });
     
-    expect(screen.getByText('Filtrar por:')).toBeInTheDocument();
+    expect(
+      screen.getByText('Filtrar por:')
+    ).toBeInTheDocument();
   });
 
   test('aplica className personalizado', () => {
@@ -76,5 +86,26 @@ describe('Componente FiltroCategorias', () => {
     
     const filtroContainer = container.querySelector('.filtro-container');
     expect(filtroContainer).toHaveClass('filtro-personalizado');
+  });
+
+  // ✅ Nuevo test: comportamiento cuando no hay categorías
+  test('muestra mensaje cuando no hay categorías disponibles', () => {
+    render(
+      <FiltroCategorias
+        categorias={[]}
+        categoriaSeleccionada=""
+        onCategoriaChange={mockOnCategoriaChange}
+      />
+    );
+
+    // Se sigue mostrando "Todas las categorías" por defecto
+    expect(
+      screen.getByText('Todas las categorías')
+    ).toBeInTheDocument();
+
+    // Y además el mensaje de sin categorías
+    const opcionSinCategorias = screen.getByText('(Sin categorías disponibles)');
+    expect(opcionSinCategorias).toBeInTheDocument();
+    expect(opcionSinCategorias).toHaveAttribute('disabled');
   });
 });

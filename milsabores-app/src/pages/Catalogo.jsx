@@ -1,4 +1,3 @@
-// src/pages/Catalogo.jsx
 import { useCarrito } from '../context/CarritoContext';
 import ProductoCard from '../components/ProductoCard';
 import { api } from '../services/ProductosService';

@@ -313,10 +313,6 @@
     font-size: 1.1em;
 }
 
-/* ========================= */
-/* HUB ADMIN Y USUARIOS      */
-/* ========================= */
-
 /* Header con título + botón cerrar sesión */
 .admin-header-top {
     display: flex;
@@ -375,10 +371,6 @@
     font-weight: 600;
 }
 
-/* ========================= */
-/* HUB: tarjetas de acceso   */
-/* ========================= */
-
 .admin-access-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -420,10 +412,6 @@
     color: #8B4513;
 }
 
-/* ========================= */
-/* FORM USUARIOS             */
-/* ========================= */
-
 .form-usuario {
     background: #ffffff;
     padding: 20px 22px;
@@ -443,8 +431,6 @@
     flex: 1;
     min-width: 200px;
 }
-
-/* ya tienes .form-group, .form-actions, así que solo reutilizamos estilos */
 
 /* Botones del formulario */
 .form-actions {
@@ -483,10 +469,6 @@
 .btn-cancel:hover {
     background: #545B62;
 }
-
-/* ========================= */
-/* TABLA USUARIOS            */
-/* ========================= */
 
 .tabla-usuarios {
     width: 100%;

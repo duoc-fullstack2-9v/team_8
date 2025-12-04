@@ -1,4 +1,3 @@
-// src/pages/UsuariosAdminPage.jsx
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
@@ -67,11 +66,15 @@ const UsuariosAdminPage = () => {
     if (
       !formUsuario.nombreUsuario ||
       !formUsuario.apellidoUsuario ||
-      !formUsuario.emailUsuario ||
-      !formUsuario.passwordUsuario
+      !formUsuario.emailUsuario 
     ) {
-      alert('Todos los campos son obligatorios.');
+      alert('Nombre, apellidos y correo son obligatorios.');
       return;
+    }
+
+    if (!usuarioEditando && !formUsuario.passwordUsuario) {
+      alert('La contraseña es obligatoria al crear un usuario.');
+    return;
     }
 
     try {
@@ -220,7 +223,6 @@ const UsuariosAdminPage = () => {
                   type="password"
                   value={formUsuario.passwordUsuario}
                   onChange={handleChangeUsuario}
-                  required
                 />
               </div>
             </div>

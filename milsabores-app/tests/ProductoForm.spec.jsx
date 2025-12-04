@@ -1,5 +1,5 @@
-import { describe, test, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { describe, test, expect, vi, beforeEach } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ProductoForm from '../src/components/ProductoForm.jsx';
 
@@ -10,7 +10,7 @@ describe('Componente ProductoForm', () => {
   const defaultProps = {
     onSave: mockOnSave,
     onCancel: mockOnCancel,
-    producto: null
+    producto: null,
   };
 
   const renderProductoForm = (props = {}) => {
@@ -23,13 +23,28 @@ describe('Componente ProductoForm', () => {
 
   test('renderiza el formulario para agregar nuevo producto', () => {
     renderProductoForm();
-    
-    expect(screen.getByText('➕ Agregar Nuevo Producto')).toBeInTheDocument();
-    expect(screen.getByLabelText(/nombre del producto/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/descripción/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/precio/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/categoría/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/url de la imagen/i)).toBeInTheDocument();
+
+    expect(
+      screen.getByText('➕ Agregar Nuevo Producto')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText(/Nombre del Producto/i)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText(/Descripción/i)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText(/Precio \(CLP\)/i)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText(/Categoría/i)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText(/URL de la Imagen/i)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText(/Marcar como producto destacado/i)
+    ).toBeInTheDocument();
   });
 
   test('renderiza el formulario para editar producto', () => {
@@ -38,85 +53,170 @@ describe('Componente ProductoForm', () => {
       descProd: 'Deliciosa torta',
       precioProd: 45000,
       categProd: 'Tortas Circulares',
-      imagenProd: '/img/torta.jpg'
+      imagenProd: '/img/torta.jpg',
+      productoDestacado: true,
     };
-    
+
     renderProductoForm({ producto: productoEditando });
-    
-    expect(screen.getByText('✏️ Editar Producto')).toBeInTheDocument();
-    expect(screen.getByDisplayValue('Torta de Chocolate')).toBeInTheDocument();
-    expect(screen.getByDisplayValue('Deliciosa torta')).toBeInTheDocument();
-    expect(screen.getByDisplayValue('45000')).toBeInTheDocument();
+
+    expect(
+      screen.getByText('✏️ Editar Producto')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByDisplayValue('Torta de Chocolate')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByDisplayValue('Deliciosa torta')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByDisplayValue('45000')
+    ).toBeInTheDocument();
+
+    // checkbox debe venir marcado
+    const checkboxDestacado = screen.getByLabelText(
+      /Marcar como producto destacado/i
+    );
+    expect(checkboxDestacado).toBeChecked();
   });
 
   test('permite escribir en los campos del formulario', async () => {
     const user = userEvent.setup();
     renderProductoForm();
-    
-    await user.type(screen.getByLabelText(/nombre del producto/i), 'Nueva Torta');
-    await user.type(screen.getByLabelText(/descripción/i), 'Descripción prueba');
-    await user.type(screen.getByLabelText(/precio/i), '50000');
-    
-    expect(screen.getByLabelText(/nombre del producto/i)).toHaveValue('Nueva Torta');
-    expect(screen.getByLabelText(/descripción/i)).toHaveValue('Descripción prueba');
-    expect(screen.getByLabelText(/precio/i)).toHaveValue(50000);
+
+    await user.type(
+      screen.getByLabelText(/Nombre del Producto/i),
+      'Nueva Torta'
+    );
+    await user.type(
+      screen.getByLabelText(/Descripción/i),
+      'Descripción prueba'
+    );
+    await user.type(
+      screen.getByLabelText(/Precio \(CLP\)/i),
+      '50000'
+    );
+
+    expect(
+      screen.getByLabelText(/Nombre del Producto/i)
+    ).toHaveValue('Nueva Torta');
+    expect(
+      screen.getByLabelText(/Descripción/i)
+    ).toHaveValue('Descripción prueba');
+    expect(
+      screen.getByLabelText(/Precio \(CLP\)/i)
+    ).toHaveValue(50000);
   });
 
-  test('llama a onSave con los datos del formulario', async () => {
+  test('permite marcar y desmarcar "producto destacado"', async () => {
     const user = userEvent.setup();
     renderProductoForm();
-    
-    // Llenar formulario
-    await user.type(screen.getByLabelText(/nombre del producto/i), 'Cheesecake');
-    await user.selectOptions(screen.getByLabelText(/categoría/i), 'Postres Individuales');
-    await user.type(screen.getByLabelText(/precio/i), '47000');
-    
-    // Enviar formulario
-    await user.click(screen.getByRole('button', { name: /agregar producto/i }));
-    
+
+    const checkboxDestacado = screen.getByLabelText(
+      /Marcar como producto destacado/i
+    );
+
+    expect(checkboxDestacado).not.toBeChecked();
+
+    await user.click(checkboxDestacado);
+    expect(checkboxDestacado).toBeChecked();
+
+    await user.click(checkboxDestacado);
+    expect(checkboxDestacado).not.toBeChecked();
+  });
+
+  test('llama a onSave con los datos del formulario (incluyendo productoDestacado)', async () => {
+    const user = userEvent.setup();
+    renderProductoForm();
+
+    await user.type(
+      screen.getByLabelText(/Nombre del Producto/i),
+      'Cheesecake'
+    );
+    await user.selectOptions(
+      screen.getByLabelText(/Categoría/i),
+      'Postres Individuales'
+    );
+    await user.type(
+      screen.getByLabelText(/Precio \(CLP\)/i),
+      '47000'
+    );
+    await user.type(
+      screen.getByLabelText(/Descripción/i),
+      'Suave cheesecake de frutos rojos'
+    );
+
+    // marcar como destacado
+    const checkboxDestacado = screen.getByLabelText(
+      /Marcar como producto destacado/i
+    );
+    await user.click(checkboxDestacado);
+
+    await user.click(
+      screen.getByRole('button', { name: /Agregar Producto/i })
+    );
+
     expect(mockOnSave).toHaveBeenCalledWith({
       nombreProd: 'Cheesecake',
-      descProd: '',
+      descProd: 'Suave cheesecake de frutos rojos',
       precioProd: 47000,
       categProd: 'Postres Individuales',
-      imagenProd: ''
+      imagenProd: '',
+      productoDestacado: true,
     });
   });
 
-  test('muestra alerta cuando faltan campos obligatorios', async () => {
+  test('muestra alerta cuando faltan campos obligatorios y no llama a onSave', async () => {
     const user = userEvent.setup();
-    
+    const alertMock = vi.spyOn(window, 'alert').mockImplementation(() => {});
+
     renderProductoForm();
-    
-    // Intentar enviar sin llenar campos obligatorios
-    await user.click(screen.getByRole('button', { name: /agregar producto/i }));
+
+    await user.click(
+      screen.getByRole('button', { name: /agregar producto/i })
+    );
+
     expect(mockOnSave).not.toHaveBeenCalled();
-    expect(screen.getByText(/agregar nuevo producto/i)).toBeInTheDocument();
+
+    alertMock.mockRestore();
   });
+
 
   test('llama a onCancel cuando se hace clic en Cancelar', async () => {
     const user = userEvent.setup();
     renderProductoForm();
-    
-    await user.click(screen.getByRole('button', { name: /cancelar/i }));
-    
+
+    await user.click(
+      screen.getByRole('button', { name: /Cancelar/i })
+    );
+
     expect(mockOnCancel).toHaveBeenCalledTimes(1);
   });
 
-  test('convierte el precio a número', async () => {
+  test('convierte el precio a número al guardar', async () => {
     const user = userEvent.setup();
     renderProductoForm();
-    
-    await user.type(screen.getByLabelText(/nombre del producto/i), 'Test');
-    await user.selectOptions(screen.getByLabelText(/categoría/i), 'Tortas Circulares');
-    await user.type(screen.getByLabelText(/precio/i), '42000');
-    
-    await user.click(screen.getByRole('button', { name: /agregar producto/i }));
-    
-    // Verificar que el precio se convirtió a número
+
+    await user.type(
+      screen.getByLabelText(/Nombre del Producto/i),
+      'Test'
+    );
+    await user.selectOptions(
+      screen.getByLabelText(/Categoría/i),
+      'Tortas Circulares'
+    );
+    await user.type(
+      screen.getByLabelText(/Precio \(CLP\)/i),
+      '42000'
+    );
+
+    await user.click(
+      screen.getByRole('button', { name: /Agregar Producto/i })
+    );
+
     expect(mockOnSave).toHaveBeenCalledWith(
       expect.objectContaining({
-        precioProd: 42000 // Número, no string
+        precioProd: 42000,          // número
+        productoDestacado: false,   // valor por defecto
       })
     );
   });
