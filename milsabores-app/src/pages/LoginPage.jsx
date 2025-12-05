@@ -2,7 +2,7 @@ import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Login from '../components/Login';
-import '../styles/Login-style.css';
+import '../styles/LoginStyle.css';
 import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {

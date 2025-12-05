@@ -1,15 +1,29 @@
-import {Link, NavLink} from 'react-router-dom';
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
-    return <nav className='navbar'>
-        <ul className="nav-links">
-            <li><NavLink to="/inicio">Inicio</NavLink></li>
-            <li><NavLink to="/quienes_somos">Quienes Somos</NavLink></li>
-            <li><NavLink to="/catalogo">Catalogo</NavLink></li>
-            <li><NavLink to="/blog">Blog</NavLink></li>
-            <li><NavLink to="/contacto">Contacto</NavLink></li>
-        </ul>
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+  const closeMenu = () => setIsOpen(false);
+
+  return (
+    <nav className="navbar">
+        <div className={`hamburger ${isOpen ? "open" : ""}`} onClick={toggleMenu}>
+            <span className="bar"></span>
+            <span className="bar"></span>
+            <span className="bar"></span>
+        </div>
+
+      <ul className={`nav-links ${isOpen ? "open" : ""}`}>
+        <li><NavLink to="/inicio" onClick={closeMenu}>Inicio</NavLink></li>
+        <li><NavLink to="/quienes_somos" onClick={closeMenu}>Quienes Somos</NavLink></li>
+        <li><NavLink to="/catalogo" onClick={closeMenu}>Catálogo</NavLink></li>
+        <li><NavLink to="/blog" onClick={closeMenu}>Blog</NavLink></li>
+        <li><NavLink to="/contacto" onClick={closeMenu}>Contacto</NavLink></li>
+      </ul>
     </nav>
+  );
 }
 
 export default Navbar;
