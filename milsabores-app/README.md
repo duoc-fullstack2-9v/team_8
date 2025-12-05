@@ -2,7 +2,7 @@
 
 Aplicación web de pastelería desarrollada con **React + Vite** que permite explorar productos, gestionar carrito de compras y administrar inventario.
 
-![Coverage](https://img.shields.io/badge/Coverage-90.3%25-brightgreen)
+![Coverage](https://img.shields.io/badge/Coverage-94.7%25-brightgreen)
 ![Tests](https://img.shields.io/badge/Tests-150%20passed-success)
 ![React](https://img.shields.io/badge/React-18.2.0-blue)
 ![Vite](https://img.shields.io/badge/Vite-5.0.0-orange)
@@ -14,31 +14,32 @@ Aplicación web de pastelería desarrollada con **React + Vite** que permite exp
 - 🔍 **Filtros por categoría** (Tortas, Postres, Veganos, etc.)
 - 🛒 **Carrito de compras** con gestión de cantidades
 - 👤 **Sistema de autenticación** (Registro/Login)
-- 📱 **Diseño responsive** para todos los dispositivos
+- 📱 **Diseño responsive** para experiencia movil y de escritorio
 
 #### Para Administradores
-- ⚙️ **Panel de administración** con credenciales especiales
-- 📊 **Gestión CRUD completa** de productos
-- 🔄 **Restauración** de productos base
-- 📈 **Filtros y estadísticas** de inventario
+- ⚙️ **Panel de administración** con autenticación de rol
+- 📊 **Gestión CRUD completa** de productos y usuarios
+- 🔄 **Restauración** de catálogo base
+- 📈 **Filtrado dinámico** por categoría
+- 📦 **Gestión rápida** de inventario
 
 ### 🛠️ Tecnologías
 
 - **Frontend:** React 18.2.0, Vite
 - **Testing:** Vitest, Testing Library
 - **Routing:** React Router DOM
-- **Estado:** Context API
+- **Estado Global:** Context API
 - **Estilos:** CSS Modules
 - **Persistencia:** LocalStorage
+- **Build:** Vite Optimized Build
 
 ### 🔒 Características Técnicas
 
-- **Estado Global:** Context API para gestión del carrito
-- **Persistencia:** LocalStorage para datos de sesión
-- **Ruteo:** React Router para navegación SPA
-- **Testing:** Vitest + Testing Library para tests unitarios e integración
-- **Build:** Vite para desarrollo rápido y builds optimizados
-- **Calidad:** 90.32% de cobertura garantiza código confiable
+- **Context API** para gestión del carrito y sesión de usuario
+- **Interceptors con Axios** para autenticación vía token
+- **Fallback automático a datos locales** en caso de falla de API
+- **Componentes desacoplados** y altamente testeado
+- **Arquitectura por features y servicios** 
 
 
 ## 📦 Instalación
@@ -56,14 +57,17 @@ npm install
 
 # Ejecutar en desarrollo
 npm run dev
+
+# Build de producción
+npm run build
 ```
 
 ## 🧪 Testing
 El proyecto cuenta con un sistema de testing completo que garantiza la calidad del código:
 
 ### ✅ Métricas de Calidad:
-- **90.32% Cobertura Total** - Líneas de código testeadas
-- **150 Tests Pasando** - Suite completa funcional
+- **94.7% Cobertura Total** - Líneas de código testeadas
+- **173 Tests Pasando** - Suite completa funcional
 - **100% Servicios** - Lógica de negocio completamente cubierta
 - **95.71% Componentes** - UI robusta y confiable
 
@@ -87,14 +91,6 @@ npm run test:watch
 
 
 ## 👥 Equipo de Desarrollo
-### Matías Suazo
-**🎯 Rol:** Quality Assurance & Testing Engineer
-**Responsabilidades:**
-- Desarrollo y ejecución de suites de pruebas completas
-- Identificación y corrección de bugs críticos
-- Garantía de calidad del código y funcionalidades
-- Implementación de estrategias de testing
-- Logro: 90.32% de cobertura con 150 tests automatizados
 
 ### Álvaro Chávez
 **🎯 Rol:** Full Stack Developer & Arquitecto
@@ -104,6 +100,15 @@ npm run test:watch
 - Desarrollo de funcionalidades principales
 - Integración de servicios y contexto global
 - Logro: Sistema robusto con panel de administración y carrito funcional
+
+### Matías Suazo
+**🎯 Rol:** Quality Assurance & Testing Engineer
+**Responsabilidades:**
+- Desarrollo y ejecución de suites de pruebas completas
+- Identificación y corrección de bugs críticos
+- Garantía de calidad del código y funcionalidades
+- Implementación de estrategias de testing
+- Logro: 90.32% de cobertura con 150 tests automatizados
 
 
 
